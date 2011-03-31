@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.2"  name="generalDangerSigns">
+
+
+	<start-state name="start-state1">
+		<transition to="checkList~1~Has any of the general danger signs?"></transition>
+	</start-state>
+
+
+	<task-node name="HAS GENERAL DANGER SIGNS">
+		<task name="A child with any general danger signs needs URGENT attention; complete the assessment and any pre-referral treatment immediately so referral is not delayed."></task>
+		<task name="Use the chart booklet."></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<task-node name="checkList~1~Has any of the general danger signs?">
+		<task name="The child vomits everything."></task>
+		<task name="The child has had convulsions."></task>
+		<task name="The child is lethargic or unconscious."></task>
+		<task name="The child is convulsing now."></task>
+		<task name="The child has trouble drinking or being breastfed."></task>
+		<transition to="HAS GENERAL DANGER SIGNS" name="Yes"></transition>
+		<transition to="HAS NO GENERAL DANGER SIGNS" name="No"></transition>
+	</task-node>
+
+	<task-node name="HAS NO GENERAL DANGER SIGNS">
+		<task name="Continue with the assessment of the child."></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+
+	<end-state name="end-state1"></end-state>
+
+
+</process-definition>

@@ -1,0 +1,83 @@
+eIMCI: Web-Mobile System (beta only)
+version: March 31, 2011. 
+
+-Members-
+Mobile:
+Michael Syson
+
+Web (OpenMRS): 
+Patrick Cura
+Lancelot Chen
+Cristina Santiago
+
+-Advisers-
+Dr. Ma. Regina E. Estuar
+Jeffrey Jongko
+Andrei Coronel
+
+-Partners-
+National Telehealth Center of the Philippines (NThC)
+Ateneo de Manila University (AdMU)
+Ateneo Java Wireless Competency Center (AJWCC)
+Ateneo Innovation Center (AIC)
+
+-Acknowledgments-
+NThC:
+Dr. Alvin B. Marcelo 
+Dr. Alex Gavino
+Dr. Jonathan Galingan
+
+Quezon City Health Center:
+Dr. Judy Martinez
+Dr. Isabelita A. Vidanes
+Fe M. Justimbaste
+Ruby P. Lucsan
+Ma. Grace B. Martinez
+
+Old Balara Health Center:
+Dr. Charissa L. Alisuag
+Edgar Almoguerra
+Dr. Edward Salao
+Dr. Melvin Makaraig
+Dr. Gino Paulo L. Lugtu
+Lourdes Acosta
+Joanna Mae Baracao
+Liza Borromeo
+
+Pasay City Health Office:
+Dr. Cesar F. Encinares
+Dr. Marie Irene Sy
+
+Dr. Lagrosa Health Center (Pasay City)
+Dr. Marilyn Demdam
+Rosendo Pantino
+Geraldine Puruganan
+Maricel Rosales
+
+Doña Marta Health Center (Pasay City) 
+Dr. Manuel Dubongco, Jr.
+Teresita Sarcia
+Arlyn Estiller
+Rochelle Bandon
+Jerlyn Baricuatro
+
+AdMU:
+Sandra Alarcon-Lovenia, and her SY 2010, 1st semester Health Informatics (cs 187.1) class, section A
+Mark Bautista and his fellow technicians and staff
+
+AIC:
+Dr. Gregory Tangonan
+Dr. Nathaniel Libatique
+Paul Cabacungan and his fellow staff
+
+AJWCC and BlueBlade Technologies, Inc.:
+Hans Roxas-Chua
+Christine Amarra and her fellow staff
+
+Engineering Research and Development for Technology (ERDT)
+
+-Contact-
+Telephone: 426-6001 loc. 5678
+Website: http://ajwcc.ateneo.edu/
+
+Copyright 2009-2011.

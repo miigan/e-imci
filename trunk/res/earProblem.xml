@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.2"  name="earProblem">
+
+
+	<start-state name="start-state1">
+		<transition to="Does the child have an ear problem?"></transition>
+	</start-state>
+
+	<decision name="Is there ear pain?">
+		<transition to="NO EAR INFECTION" name="No"></transition>
+		<transition to="ACUTE EAR INFECTION" name="Yes"></transition>
+	</decision>
+
+	<decision name="Is there pus draining from the ear?">
+		<transition to="Is there ear pain?" name="No"></transition>
+		<transition to="Pus discharge is reported for 14 days or more." name="Yes"></transition>
+	</decision>
+
+	<task-node name="CHRONIC EAR INFECTION">
+		<task name="Dry the ear by wicking.">
+			<controller class=""></controller>
+		</task>
+		<task name="Treat with topical quinolone eardrops for 2 weeks."></task>
+		<task name="Follow-up in 5 days."></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<task-node name="NO EAR INFECTION">
+		<task name="No treatment."></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<decision name="Pus discharge is reported for 14 days or more.">
+		<transition to="ACUTE EAR INFECTION" name="No"></transition>
+		<transition to="CHRONIC EAR INFECTION" name="Yes"></transition>
+	</decision>
+
+	<task-node name="ACUTE EAR INFECTION">
+		<task name="Give an antibiotic for 5 days."></task>
+		<task name="Give paracetamol for pain."></task>
+		<task name="Dry the ear by wicking."></task>
+		<task name="Follow-up in 5 days."></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<decision name="Is there tender swelling behind the ear?">
+		<transition to="Is there pus draining from the ear?" name="No"></transition>
+		<transition to="MASTOIDITIS" name="Yes"></transition>
+	</decision>
+
+	<task-node name="MASTOIDITIS">
+		<task name="Give first dose of an appropriate antibiotic."></task>
+		<task name="Give first dose of paracetamol for pain."></task>
+		<task name="Refer URGENTLY to hospital."></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<decision name="Does the child have an ear problem?">
+		<transition to="Is there tender swelling behind the ear?" name="Yes"></transition>
+		<transition to="end-state1" name="No"></transition>
+	</decision>
+
+
+	<end-state name="end-state1"></end-state>
+
+
+</process-definition>

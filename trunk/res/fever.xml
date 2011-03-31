@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.2"  name="fever">
+
+
+	<start-state name="start-state1">
+		<transition to="Does the child have fever? (by history, or feels hot or temperature 37.5 Deg. C [axilliary temperature; rectal temperature readings are approximately 0.5 Deg. C higher] or above)"></transition>
+	</start-state>
+
+
+	<decision name="Does the child have fever? (by history, or feels hot or temperature 37.5 Deg. C [axilliary temperature; rectal temperature readings are approximately 0.5 Deg. C higher] or above)">
+		<transition to="Has the child had fever for more than 7 days?" name="Yes"></transition>
+		<transition to="end-state1" name="to end-state1"></transition>
+	</decision>
+
+	<decision name="Does the child live in a malaria area?">
+		<transition to="Has the child visited a malaria area in past 4 weeks?" name="No"></transition>
+		<transition to="special~obtain a blood smear" name="Yes"></transition>
+	</decision>
+
+	<decision name="Has the child visited a malaria area in past 4 weeks?">
+		<transition to="special~obtain a blood smear" name="Yes"></transition>
+		<transition to="checkList~1~2~Has any of the general danger signs?" name="No"></transition>
+	</decision>
+
+	<task-node name="special~obtain a blood smear">
+		<transition to="checkList~1~1~Has any of the general danger signs?" name="Any"></transition>
+	</task-node>
+
+	<task-node name="VERY SEVERE FEBRILE DISEASE/MALARIA">
+		<task name="Give first does of quinine (under medical supervision or if a hospital is not accessible within 4 hours)."></task>
+		<task name="Give first does of an appropriate antibiotic."></task>
+		<task name="Treat the child to prevent low blood sugar."></task>
+		<task name="Give one does of paracetamol in health center for high fever (38 Deg. C or above)."></task>
+		<task name="Send a blood smear with the patient."></task>
+		<task name="Refer URGENTLY to hospital."></task>
+		<transition to="Does the child have measles now, or has had measles within the last 3 months?" name="No"></transition>
+	</task-node>
+
+	<task-node name="MALARIA">
+		<task name="Treat the child with an oral antimalarial."></task>
+		<task name="Give one dose of paracetamol in health center for high fever (38.5°C or above)."></task>
+		<task name="Advise mother when to return immediately"></task>
+		<task name="Follow-up in 2 days if fever persists."></task>
+		<task name="If fever is present every day for more than 7 days, refer for assessment."></task>
+		<transition to="Does the child have measles now, or has had measles within the last 3 months?" name="Any"></transition>
+	</task-node>
+
+	<decision name="1~Has stiff neck?">
+		<transition to="VERY SEVERE FEBRILE DISEASE/MALARIA" name="Yes"></transition>
+		<transition to="Blood smear ( + )?" name="No"></transition>
+	</decision>
+
+	<decision name="Blood smear ( + )?">
+		<transition to="MALARIA" name="Yes"></transition>
+		<transition to="Blood smear ( - )?" name="No"></transition>
+	</decision>
+
+	<decision name="Has no runny nose?">
+		<transition to="Has no measles?" name="Yes"></transition>
+		<transition to="FEVER: MALARIA UNLIKELY" name="No"></transition>
+	</decision>
+
+	<decision name="Has no measles?">
+		<transition to="Has no other causes of fever?" name="Yes"></transition>
+		<transition to="FEVER: MALARIA UNLIKELY" name="No"></transition>
+	</decision>
+
+	<decision name="Has no other causes of fever?">
+		<transition to="MALARIA" name="Yes"></transition>
+		<transition to="FEVER: MALARIA UNLIKELY" name="No"></transition>
+	</decision>
+
+	<task-node name="VERY SEVERE FEBRILE DISEASE">
+		<task name="Give first dose of an appropriate antibiotic."></task>
+		<task name="Treat the child to prevent low blood sugar."></task>
+		<task name="Give one dose of paracetamol in health center for high fever (38.5 Deg. C or above)."></task>
+		<task name="Refer URGENTLY to hospital."></task>
+		<transition to="Does the child have measles now, or has had measles within the last 3 months?" name="Any"></transition>
+	</task-node>
+
+	<decision name="2~Has stiff neck?">
+		<transition to="VERY SEVERE FEBRILE DISEASE" name="Yes"></transition>
+		<transition to="FEVER: NO MALARIA" name="No"></transition>
+	</decision>
+
+	<task-node name="FEVER: NO MALARIA">
+		<task name="Give one dose of paracetamol in health center for high fever (38.5°C or above)."></task>
+		<task name="Advise mother when to return immediately."></task>
+		<task name="Follow-up in 2 days if fever persists."></task>
+		<task name="If fever is present every day for more than 7 days, refer for assessment."></task>
+		<transition to="Does the child have measles now, or has had measles within the last 3 months?" name="Any"></transition>
+	</task-node>
+
+	<decision name="Blood smear ( - )?">
+		<transition to="Has no runny nose?" name="No"></transition>
+		<transition to="FEVER: MALARIA UNLIKELY" name="Yes"></transition>
+	</decision>
+
+	<task-node name="FEVER: MALARIA UNLIKELY">
+		<task name="Give one dose of paracetamol in health center for high fever (38.5°C or above)."></task>
+		<task name="Advise mother when to return immediately."></task>
+		<task name="Follow-up in 2 days if fever persists."></task>
+		<task name="If fever is present every day for more than 7 days, refer for assessment."></task>
+		<task name="Treat other causes of fever."></task>
+		<transition to="Does the child have measles now, or has had measles within the last 3 months?" name="Any"></transition>
+	</task-node>
+
+	<decision name="Has the child had fever for more than 7 days?">
+		<transition to="Has the fever been present every day?" name="Yes"></transition>
+		<transition to="textField~What is the exact number of days that the child has had fever?" name="No"></transition>
+	</decision>
+
+	<decision name="Does the child have measles now, or has had measles within the last 3 months?">
+		<transition to="Has clouding of cornea?" name="Yes"></transition>
+		<transition to="Has dengue risk?" name="No"></transition>
+	</decision>
+
+	<decision name="Has clouding of cornea?">
+		<transition to="Has deep or extensive mouth ulcers?" name="No"></transition>
+		<transition to="SEVERE COMPLICATED MEASLES" name="Yes"></transition>
+	</decision>
+
+	<decision name="Has deep or extensive mouth ulcers?">
+		<transition to="SEVERE COMPLICATED MEASLES" name="Yes"></transition>
+		<transition to="Is there pus draining from the eye?" name="No"></transition>
+	</decision>
+
+	<task-node name="SEVERE COMPLICATED MEASLES">
+		<task name="Give Vitamin A."></task>
+		<task name="Give first does of an appropriate antibiotic."></task>
+		<task name="If clouding of the cornea or pus draining from the eye, apply tetracycline ye ointment."></task>
+		<task name="Refer URGENTLY to hospital."></task>
+		<transition to="Has dengue risk?" name="Any"></transition>
+	</task-node>
+
+	<decision name="Is there pus draining from the eye?">
+		<transition to="Has mouth ulcers?" name="No"></transition>
+		<transition to="MEASLES WITH EYE OR MOUTH COMPLICATIONS" name="Yes"></transition>
+	</decision>
+
+	<task-node name="MEASLES WITH EYE OR MOUTH COMPLICATIONS">
+		<transition to="Has dengue risk?" name="Any"></transition>
+	</task-node>
+
+	<decision name="Has mouth ulcers?">
+		<transition to="MEASLES WITH EYE OR MOUTH COMPLICATIONS" name="Yes"></transition>
+		<transition to="MEASLES" name="No"></transition>
+	</decision>
+
+	<task-node name="MEASLES">
+		<task name="Give Vitamin A."></task>
+		<task name="Advise mother when to return immediately"></task>
+		<transition to="Has dengue risk?" name="Any"></transition>
+	</task-node>
+
+	<task-node name="checkList~1~Classify dengue. Has at least one (1) of the following signs.">
+		<task name="Bleeding from nose or gums"></task>
+		<task name="Bleeding in stools or vomitus"></task>
+		<task name="Black stools or vomitus"></task>
+		<task name="Skin petechiae"></task>
+		<task name="Cold and clammy extremities"></task>
+		<task name="Capillary refill more than 3 seconds"></task>
+		<task name="Abdominal pain"></task>
+		<task name="Vomiting"></task>
+		<task name="Tourniquet test positive (Perform test if not yet done)"></task>
+		<transition to="SEVERE DENGUE HEMORRHAGIC FEVER" name="Yes"></transition>
+		<transition to="FEVER: DENGUE HEMORRHAGIC FEVER UNLIKELY" name="No"></transition>
+	</task-node>
+
+	<task-node name="SEVERE DENGUE HEMORRHAGIC FEVER">
+		<task name="If skin petechiae or abdominal pain or vomiting or positive tourniquet test are the only positive signs, give ORS (Plan B)"></task>
+		<task name="If any other signs of bleeding are positive, give fluids rapidly as in Plan C."></task>
+		<task name="Treat the child to prevent low blood sugar."></task>
+		<task name="Refer all children URGENTLY to hospital"></task>
+		<task name="DO NOT GIVE ASPIRIN."></task>
+		<transition to="end-state1" name="Any"></transition>
+	</task-node>
+
+	<task-node name="FEVER: DENGUE HEMORRHAGIC FEVER UNLIKELY">
+		<task name="Advise mother when to return immediately."></task>
+		<task name="Follow up in 2 days if fever persists or child shows signs of bleeding."></task>
+		<task name="DO NOT GIVE ASPIRIN."></task>
+		<transition to="end-state1" name="Any"></transition>
+	</task-node>
+
+	<task-node name="textField~What is the exact number of days that the child has had fever?">
+		<transition to="Does the child live in a malaria area?" name="Any"></transition>
+	</task-node>
+
+	<decision name="Has the fever been present every day?">
+		<transition to="textField~What is the exact number of days that the child has had fever?" name="Yes"></transition>
+		<transition to="textField~What is the exact number of days that the child has had fever?" name="No"></transition>
+	</decision>
+
+	<task-node name="checkList~1~2~Has any of the general danger signs?">
+		<task name="The child vomits everything."></task>
+		<task name="The child has had convulsions."></task>
+		<task name="The child is lethargic or unconscious."></task>
+		<task name="The child is convulsing now."></task>
+		<task name="The child has trouble drinking or being breastfed."></task>
+		<transition to="VERY SEVERE FEBRILE DISEASE" name="Yes"></transition>
+		<transition to="2~Has stiff neck?" name="No"></transition>
+	</task-node>
+
+	<task-node name="checkList~1~1~Has any of the general danger signs?">
+		<task name="The child vomits everything."></task>
+		<task name="The child has had convulsions."></task>
+		<task name="The child is lethargic or unconscious."></task>
+		<task name="The child is convulsing now."></task>
+		<task name="The child has trouble drinking or being breastfed."></task>
+		<transition to="1~Has stiff neck?" name="No"></transition>
+		<transition to="VERY SEVERE FEBRILE DISEASE/MALARIA" name="Yes"></transition>
+	</task-node>
+
+	<decision name="Has dengue risk?">
+		<transition to="checkList~1~Classify dengue. Has at least one (1) of the following signs." name="Yes"></transition>
+		<transition to="end-state1" name="No"></transition>
+	</decision>
+
+
+	<end-state name="end-state1"></end-state>
+
+
+</process-definition>
