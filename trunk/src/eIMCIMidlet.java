@@ -42,7 +42,7 @@ public class eIMCIMidlet extends MIDlet {
 	public void pauseApp() {
 	}
 	public void destroyApp(boolean unconditional) {
-		//be sure to close DB first before notifying myMIDLET to close
+		//be sure to close DB first before notifying eIMCIMidlet to close
 		myForm.getViewPendingListDB().close();			
 	}
 }
