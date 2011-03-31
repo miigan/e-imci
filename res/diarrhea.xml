@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.2"  name="diarrhea">
+
+
+	<start-state name="start-state1">
+		<transition to="Does the child have diarrhea?"></transition>
+	</start-state>
+
+
+	<decision name="Has blood in the stool?">
+		<transition to="DYSENTERY" name="Yes"></transition>
+		<transition to="end-state1" name="No"></transition>
+	</decision>
+
+	<task-node name="DYSENTERY">
+		<task name="Give ciprofloxacin for 3 days"></task>
+		<task name="Follow-up in 2 days"></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<task-node name="SEVERE DEHYDRATION">
+		<task name="If child has no other severe classification: Give fluid for severe dehydration"></task>
+		<task name="OR, if child also has another severe classification: 1) Refer URGENTLY to hospital with mother giving frequent sips of ORS on the way 2) Advise the mother to continue breastfeeding"></task>
+		<task name="If child is 2 years or older and there is cholera in your area, give antibiotic for cholera"></task>
+		<transition to="2~Has diarrhea for 14 days or more?" name="Any"></transition>
+	</task-node>
+
+	<task-node name="checkList~2~Check for SEVERE DEHYDRATION. Has at least two (2) of the following signs:">
+		<task name="Is lethargic or unconscious."></task>
+		<task name="Has sunken eyes."></task>
+		<task name="Is not able to drink or is drinking poorly."></task>
+		<task name="Skin pinch goes back VERY slowly (longer than 2 seconds)."></task>
+		<transition to="SEVERE DEHYDRATION" name="Yes"></transition>
+		<transition to="checkList~2~Check for SOME DEHYDRATION. Has at least two (2) of the following signs:" name="No"></transition>
+	</task-node>
+
+	<task-node name="checkList~2~Check for SOME DEHYDRATION. Has at least two (2) of the following signs:">
+		<task name="Is restless/ irritable."></task>
+		<task name="Has sunken eyes."></task>
+		<task name="Drinks eagerly/thirsty."></task>
+		<task name="Skin pinch goes back slowly (shorter than or equal to 2 seconds)."></task>
+		<transition to="SOME DEHYDRATION" name="Yes"></transition>
+		<transition to="NO DEHYDRATION" name="No"></transition>
+	</task-node>
+
+	<task-node name="SOME DEHYDRATION">
+		<task name="Give fluid, zinc supplements and food for some dehydration (Plan B)"></task>
+		<task name="If child also has a severe classification: 1) Refer URGENTLY to hospital with mother giving frequent sips of ORS on the way, 2) Advise the mother to continue breastfeeding"></task>
+		<task name="Advise mother when to return immediately"></task>
+		<task name="Follow-up in 5 days if not improving"></task>
+		<transition to="2~Has diarrhea for 14 days or more?" name="Any"></transition>
+	</task-node>
+
+	<decision name="2~Has diarrhea for 14 days or more?">
+		<transition to="Has blood in the stool?" name="No"></transition>
+		<transition to="SEVERE PERSISTENT DIARRHEA" name="Yes"></transition>
+	</decision>
+
+	<task-node name="SEVERE PERSISTENT DIARRHEA">
+		<task name="Treat dehydration before referral unless the child has another severe classification"></task>
+		<task name="Refer to hospital"></task>
+		<transition to="Has blood in the stool?" name="Any"></transition>
+	</task-node>
+
+	<task-node name="PERSISTENT DIARRHEA">
+		<task name="Advise the mother on feeding a child who has PERSISTENT DIARRHEA"></task>
+		<task name="Give multivitamins and minerals (including zinc) for 14 days"></task>
+		<task name="Follow up in 5 days"></task>
+		<transition to="Has blood in the stool?" name="Any"></transition>
+	</task-node>
+
+	<decision name="Does the child have diarrhea?">
+		<transition to="checkList~2~Check for SEVERE DEHYDRATION. Has at least two (2) of the following signs:" name="Yes"></transition>
+		<transition to="end-state1" name="No"></transition>
+	</decision>
+
+	<decision name="1~Has diarrhea for 14 days or more?">
+		<transition to="PERSISTENT DIARRHEA" name="Yes"></transition>
+		<transition to="Has blood in the stool?" name="No"></transition>
+	</decision>
+
+	<task-node name="NO DEHYDRATION">
+		<task name="Give fluid, zinc supplements and food to treat diarrhea at home (Plan A)"></task>
+		<task name="Advise mother when to return immediately"></task>
+		<task name="Follow-up in 5 days if not improving"></task>
+		<transition to="1~Has diarrhea for 14 days or more?" name="Any"></transition>
+	</task-node>
+
+
+	<end-state name="end-state1"></end-state>
+
+
+</process-definition>

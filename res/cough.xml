@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.2"  name="cough">
+
+
+	<start-state name="start-state1">
+		<transition to="Does the child have cough or difficulty breathing?"></transition>
+	</start-state>
+
+
+	<task-node name="textField~For how many days?">
+		<transition to="Does the child have wheezing? (child must be calm)" name="Any"></transition>
+	</task-node>
+
+	<task-node name="textField~1~Count the breaths of a calm child in one minute.">
+		<transition to="1~Has fast breathing? (i.e. 50 breaths per minute or more for a 2- to 12- month-old child; 40 breaths per minute or more for a 12- month and up-old child)" name="Any"></transition>
+	</task-node>
+
+	<decision name="Does the child have wheezing? (child must be calm)">
+		<transition to="Has a trial of rapid acting inhaled bronchodilator been given?" name="Yes"></transition>
+		<transition to="2~Does the child have chest indrawing? (child must be calm)" name="No"></transition>
+	</decision>
+
+	<decision name="Has a trial of rapid acting inhaled bronchodilator been given?">
+		<transition to="2~Does the child have chest indrawing? (child must be calm)" name="Yes"></transition>
+		<transition to="textField~1~Count the breaths of a calm child in one minute." name="No"></transition>
+	</decision>
+
+	<task-node name="special~Give a trial of rapid acting inhaled bronchodilator for up to 3 times 15 to 20 minutes apart. Count the breaths and look for chest indrawing again, and then classify.">
+		<transition to="2~Does the child have chest indrawing? (child must be calm)" name="Any"></transition>
+	</task-node>
+
+	<decision name="1~Does the child have chest indrawing? (child must be calm)">
+		<transition to="special~Give a trial of rapid acting inhaled bronchodilator for up to 3 times 15 to 20 minutes apart. Count the breaths and look for chest indrawing again, and then classify." name="Yes"></transition>
+		<transition to="COUGH OR COLD" name="No"></transition>
+	</decision>
+
+	<task-node name="COUGH OR COLD">
+		<task name="If wheezing (even if it disappeared after rapidly acting bronchodilator) give an inhaled bronchodilator for 5 days (in settings where inhaled bronchodilator is not available, oral salbutamol may be the second choice)"></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<task-node name="textField~2~Count the breaths of a calm child in one minute.">
+		<transition to="2~Has fast breathing? (i.e. 50 breaths per minute or more for a 2- to 12- month-old child; 40 breaths per minute or more for a 12- month and up-old child)" name="Any"></transition>
+	</task-node>
+
+	<decision name="2~Does the child have chest indrawing? (child must be calm)">
+		<transition to="Does the child have stridor? (child must be calm)" name="No"></transition>
+		<transition to="SEVERE PNEUMONIA OR VERY SEVERE DISEASE" name="Yes"></transition>
+	</decision>
+
+	<task-node name="PNEUMONIA">
+		<task name="Give oral antibiotic for 3 days"></task>
+		<task name="If wheezing (even if disappeared after rapidly acting bronchodilator) give an inhaled bronchodilator for 5 days (in settings where inhaled bronchodilator is not available, oral salbutamol may be the second choice)"></task>
+		<task name="Soothe the throat and relieve the cough with a safe remedy"></task>
+		<task name="If coughing for more than 3 weeks or if having recurrent wheezing, refer for assessment for TB or asthma"></task>
+		<task name="Advise the mother when to return immediately"></task>
+		<task name="Follow-up in 2 days"></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<decision name="Does the child have stridor? (child must be calm)">
+		<transition to="SEVERE PNEUMONIA OR VERY SEVERE DISEASE" name="Yes"></transition>
+		<transition to="checkList~1~Has any of the general danger signs?" name="No"></transition>
+	</decision>
+
+	<task-node name="SEVERE PNEUMONIA OR VERY SEVERE DISEASE">
+		<task name="Give first dose of an appropriate antibiotic"></task>
+		<task name="Refer URGENTLY to hospital (If referral is not possible, manage child as described in the IMCI booklet, Treat the Child, Annex: Where Referral Is Not Possible, and WHO guidelines for inpatient care."></task>
+		<transition to="end-state1" name="to-end"></transition>
+	</task-node>
+
+	<decision name="Does the child have cough or difficulty breathing?">
+		<transition to="textField~For how many days?" name="Yes"></transition>
+		<transition to="end-state1" name="No"></transition>
+	</decision>
+
+	<decision name="1~Has fast breathing? (i.e. 50 breaths per minute or more for a 2- to 12- month-old child; 40 breaths per minute or more for a 12- month and up-old child)">
+		<transition to="1~Does the child have chest indrawing? (child must be calm)" name="No"></transition>
+		<transition to="special~Give a trial of rapid acting inhaled bronchodilator for up to 3 times 15 to 20 minutes apart. Count the breaths and look for chest indrawing again, and then classify." name="Yes"></transition>
+	</decision>
+
+	<decision name="2~Has fast breathing? (i.e. 50 breaths per minute or more for a 2- to 12- month-old child; 40 breaths per minute or more for a 12- month and up-old child)">
+		<transition to="PNEUMONIA" name="Yes"></transition>
+		<transition to="COUGH OR COLD" name="No"></transition>
+	</decision>
+
+	<task-node name="checkList~1~Has any of the general danger signs?">
+		<task name="The child vomits everything."></task>
+		<task name="The child has had convulsions."></task>
+		<task name="The child is lethargic or unconscious."></task>
+		<task name="The child is convulsing now."></task>
+		<task name="The child has trouble drinking or being breastfed."></task>
+		<transition to="SEVERE PNEUMONIA OR VERY SEVERE DISEASE" name="Yes"></transition>
+		<transition to="textField~2~Count the breaths of a calm child in one minute." name="No"></transition>
+	</task-node>
+
+
+	<end-state name="end-state1"></end-state>
+
+
+</process-definition>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="res"/>
+	<classpathentry kind="con" path="org.elipse.mtj.JavaMEContainer/Sony Ericsson SDK 2.5.0.6 for the Java(TM) ME Platform(Emulator)/SonyEricsson_JP7_176x220_Emu"/>
+	<classpathentry exported="true" kind="lib" path="F:/ProgramFiles/eIMCI-AdditionalLibraries/Perst/perst-423/perst/lib/perst-rms.jar"/>
+	<classpathentry exported="true" kind="lib" path="F:/ProgramFiles/eIMCI-AdditionalLibraries/LWUIT/LWUIT_1_4/LWUIT_1_4/lib/LWUIT.jar"/>
+	<classpathentry exported="true" kind="lib" path="F:/ProgramFiles/eIMCI-AdditionalLibraries/kXML/kxml2-2.3.0.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
