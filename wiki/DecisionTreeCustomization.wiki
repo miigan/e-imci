@@ -1,14 +1,4 @@
 #labels Phase-Implementation
-#This wiki discusses how to create your own decision trees that can be fed into the eIMCI JavaME application which would create the UI on the phone.
+You may get hold of the step-by-step guide to create your own decision tree using Eclipse IDE and jBPM from the "Downloads" tab.
 
-= Introduction =
-
-This page is still under construction.
-
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+Here's a quick [http://code.google.com/p/e-imci/downloads/detail?name=customizingEIMCIDecisionTreeWikiJune15%2C2011.pdf&can=2&q=#makechanges link].
